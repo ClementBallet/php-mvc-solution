@@ -1,0 +1,16 @@
+{
+  "name": "c.ballet/php-mvc-solution",
+  "authors": [
+    {
+      "name": "Clément Ballet"
+    }
+  ],
+  "require": {
+    "vlucas/phpdotenv": "^5.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": ""
+    }
+  }
+}

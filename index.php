@@ -1,11 +1,7 @@
 <?php
 namespace App;
 
-spl_autoload_register(function ($class) {
-    $class = str_replace(__NAMESPACE__ . '\\', '', $class);
-    $class = str_replace('\\', '/', $class);
-    require __DIR__ . '/' . $class . '.php';
-});
+require "vendor/autoload.php";
 ?>
 
 <!DOCTYPE html>
@@ -26,11 +22,16 @@ use App\Controllers\PostController;
 use App\Models\Database;
 use App\Models\Post;
 use App\Views\Single;
+use Dotenv\Dotenv;
 
-Database::$host = "localhost";
-Database::$user = "root";
-Database::$pass = "";
-Database::$dbName = "blog";
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+// Les constantes du fichier .env pour la connexion à la base de données sont maintenant stockées dans les superglobales $_SERVER et $_ENV
+Database::$host = $_ENV["DB_HOST"];
+Database::$user = $_ENV["DB_USER"];
+Database::$pass = $_ENV["DB_PASSWORD"];
+Database::$dbName = $_ENV["DB_NAME"];
 
 Database::connect();
 
@@ -59,8 +60,6 @@ else
 {
 //    render("Views/home");
 }
-
-
 ?>
 
 </body>
