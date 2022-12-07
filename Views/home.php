@@ -1,3 +1,5 @@
-<h1>Page d'accueil</h1>
+<?php
+require "header.php";
+?>
 
-<a href="/?action=blog">Aller vers le blog.</a>
+<h1>Page d'accueil</h1>

@@ -1,28 +1,20 @@
 <?php
+
 namespace App\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 
 class PostController extends Controller
 {
-    public function showPost ()
+    public function showPost(int $post_id)
     {
-        $id = $_GET["post_id"];
-
-        if (empty($id))
-        {
-            header('HTTP/1.0 404 Not Found');
-            $this->render("Views/404");
-            return;
-        }
-
         $post = new Post();
-        $post = $post->getPost($id);
+        $post = $post->getPost($post_id);
 
         if (empty($post))
         {
-            header('HTTP/1.0 404 Not Found');
-            $this->render("Views/404");
+            $this->redirectToErrorPage();
         }
         else
         {
@@ -31,8 +23,18 @@ class PostController extends Controller
         }
     }
 
-    public function showAllPosts ()
+    public function showAllPosts()
     {
+        $posts = new Post();
+        $posts = $posts->getAllPosts();
 
+        if (empty($posts))
+        {
+            $this->redirectToErrorPage();
+        }
+        else
+        {
+            $this->render("Views/blog", compact("posts"));
+        }
     }
 }

@@ -18,10 +18,10 @@ require "vendor/autoload.php";
 
 <?php
 
+use App\Controllers\CategoryController;
+use App\Controllers\HomeController;
 use App\Controllers\PostController;
 use App\Models\Database;
-use App\Models\Post;
-use App\Views\Single;
 use Dotenv\Dotenv;
 
 $dotenv = Dotenv::createImmutable(__DIR__);
@@ -39,26 +39,43 @@ Database::connect();
 if (isset($_GET["post_id"]))
 {
     $controller = new PostController();
-    $controller->showPost();
-}
-elseif (isset($_GET["action"]) && $_GET["action"] === "blog")
-{
-    $posts = new Post();
-    $posts = $posts->getAllPost();
 
-    if (empty($posts))
+    if (empty($_GET["post_id"]))
     {
-        header('HTTP/1.0 404 Not Found');
-//        render("Views/404");
+        $controller->redirectToErrorPage();
     }
     else
     {
-//        render("Views/blog", compact("posts"));
+        $controller->showPost($_GET["post_id"]);
+    }
+}
+elseif (isset($_GET["action"]) && $_GET["action"] === "blog")
+{
+    $postController = new PostController();
+    $postController->showAllPosts();
+}
+elseif (isset($_GET["action"]) && $_GET["action"] === "all_categories")
+{
+    $categoryController = new CategoryController();
+    $categoryController->showAllCategories();
+}
+elseif (isset($_GET["cat_id"]))
+{
+    $controller = new CategoryController();
+
+    if (empty($_GET["cat_id"]))
+    {
+        $controller->redirectToErrorPage();
+    }
+    else
+    {
+        $controller->showAllPostsFromCategory($_GET["cat_id"]);
     }
 }
 else
 {
-//    render("Views/home");
+    $controller = new HomeController();
+    $controller->showHome();
 }
 ?>
 
