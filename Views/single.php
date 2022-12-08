@@ -2,8 +2,6 @@
 namespace App\Views;
 
 $post = $data["post"];
-
-require "header.php";
 ?>
 <article>
     <h1><?= $post["title"] ?></h1>

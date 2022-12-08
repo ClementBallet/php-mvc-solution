@@ -11,8 +11,6 @@ else
 {
     $page_title = "Catégorie : " . $posts[0]["category_name"];
 }
-
-require "header.php";
 ?>
 
 <h1><?= $page_title ?></h1>

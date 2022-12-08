@@ -1,7 +1,5 @@
 <?php
 $categories = $data["categories"];
-
-require "header.php";
 ?>
 
 <h2>Toutes les catégories</h2>
