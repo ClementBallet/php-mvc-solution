@@ -1,0 +1,11 @@
+{% extends "base.twig" %}
+
+{% block content %}
+    <article>
+        <h1>{{ post.title }}</h1>
+        <a href="/?cat_id={{ post.category_id }}" class="category">{{ post.category_name }}</a>
+        <span>Par {{ post.author }}</span>
+        <time>Le {{ post.created_at | format_datetime(locale='fr',pattern="EEEE dd MMMM YYYY") }}</time>
+        <p>{{ post.content | nl2br }}</p>
+    </article>
+{% endblock %}

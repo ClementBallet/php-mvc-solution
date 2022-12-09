@@ -30,6 +30,10 @@ header li {
     position: relative;
 }
 
+header li:last-child {
+    margin-left: auto;
+}
+
 header li:hover {
     background-color: white;
 }

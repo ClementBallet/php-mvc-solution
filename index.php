@@ -1,23 +1,10 @@
 <?php
+
 namespace App;
 
 require "vendor/autoload.php";
-?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mon blog</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<?php
-
+use App\Controllers\AdminController;
 use App\Controllers\CategoryController;
 use App\Controllers\HomeController;
 use App\Controllers\PostController;
@@ -36,48 +23,56 @@ Database::$dbName = $_ENV["DB_NAME"];
 Database::connect();
 
 // Router
+
+// Gestion du routage vers l'affichage des articles (vue : single)
 if (isset($_GET["post_id"]))
 {
     $controller = new PostController();
 
     if (empty($_GET["post_id"]))
     {
-        $controller->redirectToErrorPage();
+        echo $controller->showErrorPage();
     }
     else
     {
-        $controller->showPost($_GET["post_id"]);
+        echo $controller->showPost($_GET["post_id"]);
     }
 }
-elseif (isset($_GET["action"]) && $_GET["action"] === "blog")
-{
-    $postController = new PostController();
-    $postController->showAllPosts();
-}
-elseif (isset($_GET["action"]) && $_GET["action"] === "all_categories")
-{
-    $categoryController = new CategoryController();
-    $categoryController->showAllCategories();
-}
+// Gestion du routage vers les articles d'une catégorie (vue : blog)
 elseif (isset($_GET["cat_id"]))
 {
     $controller = new CategoryController();
 
     if (empty($_GET["cat_id"]))
     {
-        $controller->redirectToErrorPage();
+        echo $controller->showErrorPage();
     }
     else
     {
-        $controller->showAllPostsFromCategory($_GET["cat_id"]);
+        echo $controller->showAllPostsFromCategory($_GET["cat_id"]);
     }
 }
+// Gestion du routage vers le blog (vue : blog)
+elseif (isset($_GET["action"]) && $_GET["action"] === "blog")
+{
+    $controller = new PostController();
+    echo $controller->showAllPosts();
+}
+// Gestion du routage vers la page des catégories (vue : categories)
+elseif (isset($_GET["action"]) && $_GET["action"] === "all_categories")
+{
+    $controller = new CategoryController();
+    echo $controller->showAllCategories();
+}
+// Gestion du routage vers l'admin' (vue : admin)
+elseif (isset($_GET["action"]) && $_GET["action"] === "admin")
+{
+    $controller = new AdminController();
+    echo $controller->showAdminPanel();
+}
+// Gestion du routage vers la page d'accueil (vue : home)
 else
 {
     $controller = new HomeController();
-    $controller->showHome();
+    echo $controller->showHome();
 }
-?>
-
-</body>
-</html>

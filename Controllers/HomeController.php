@@ -4,8 +4,8 @@ namespace App\Controllers;
 
 class HomeController extends Controller
 {
-    public function showHome()
+    public function showHome(): string
     {
-        $this->render("Views/home");
+        return $this->render("home.twig");
     }
 }

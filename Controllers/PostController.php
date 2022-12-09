@@ -7,34 +7,37 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
-    public function showPost(int $post_id)
+    public function showPost(int $post_id): string
     {
         $post = new Post();
         $post = $post->getPost($post_id);
 
         if (empty($post))
         {
-            $this->redirectToErrorPage();
+            return $this->showErrorPage();
         }
         else
         {
             $post = $post[0];
-            $this->render("Views/single", compact("post"));
+            return $this->render("single.twig", compact("post"));
         }
     }
 
-    public function showAllPosts()
+    public function showAllPosts(): string
     {
         $posts = new Post();
         $posts = $posts->getAllPosts();
 
         if (empty($posts))
         {
-            $this->redirectToErrorPage();
+            return $this->showErrorPage();
         }
         else
         {
-            $this->render("Views/blog", compact("posts"));
+            return $this->render("blog.twig", array(
+                "posts" => $posts,
+                "page_title" => "Blog"
+            ));
         }
     }
 }

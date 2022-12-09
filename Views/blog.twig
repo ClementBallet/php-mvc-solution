@@ -1,0 +1,17 @@
+{% extends "base.twig" %}
+
+{% block content %}
+    <h1>{{ page_title }}{{ posts.0.category_name }}</h1>
+    <h2>Tous les derniers articles</h2>
+    <section class="card-container">
+        {% for post in posts %}
+            <article class="card">
+                <a href="/?post_id={{ post.id }}" class="title">{{ post.title }}</a>
+                <a href="/?cat_id={{ post.category_id }}" class="category">{{ post.category_name }}</a>
+                <span>Par {{ post.author }}</span>
+                <time>Le {{ post.created_at | format_datetime(locale='fr',pattern="EEEE dd MMMM YYYY") }}</time>
+                <p>{{ post.content | u.truncate(150, true, '...') }}</p>
+            </article>
+        {% endfor %}
+    </section>
+{% endblock %}

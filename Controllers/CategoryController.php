@@ -7,17 +7,20 @@ use App\Models\Post;
 
 class CategoryController extends Controller
 {
-    public function showAllPostsFromCategory(int $cat_id)
+    public function showAllPostsFromCategory(int $cat_id): string
     {
         $posts = new Post();
         $posts = $posts->getAllPostsFromCategory($cat_id);
-        $this->render("Views/blog", compact("posts"));
+        return $this->render("blog.twig", array(
+            "posts" => $posts,
+            "page_title" => "Categories : "
+        ));
     }
 
-    public function showAllCategories()
+    public function showAllCategories(): string
     {
         $categories = new Category();
         $categories = $categories->getAllCategories();
-        $this->render("Views/categories", compact("categories"));
+        return $this->render("categories.twig", compact("categories"));
     }
 }
