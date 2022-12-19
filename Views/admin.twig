@@ -2,4 +2,14 @@
 
 {% block content %}
     <h1>Panneau d'administration</h1>
+
+    <nav class="admin-navigation">
+        <ul>
+            <li><a href="/?action=admin&manage=posts">Administrer les articles</a></li>
+            <li><a href="/?action=admin&manage=categories">Administrer les catégories</a></li>
+            <li><a href="/?action=admin&manage=users">Administrer les utilisateurs</a></li>
+        </ul>
+    </nav>
+
+    {% block manage %}{% endblock %}
 {% endblock %}

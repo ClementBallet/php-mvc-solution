@@ -2,11 +2,21 @@
 
 namespace App\Controllers;
 
-use App\Models\Category;
 use App\Models\Post;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 class PostController extends Controller
 {
+
+    /**
+     * @param int $post_id
+     * @return string
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
     public function showPost(int $post_id): string
     {
         $post = new Post();
@@ -23,6 +33,12 @@ class PostController extends Controller
         }
     }
 
+    /**
+     * @return string
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
     public function showAllPosts(): string
     {
         $posts = new Post();

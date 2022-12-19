@@ -9,7 +9,8 @@
     "vlucas/phpdotenv": "^5.5",
     "twig/twig": "^3.4",
     "twig/string-extra": "^3.4",
-    "twig/intl-extra": "^3.4"
+    "twig/intl-extra": "^3.4",
+    "ext-pdo": "*"
   },
   "autoload": {
     "psr-4": {

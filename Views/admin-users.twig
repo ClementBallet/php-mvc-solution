@@ -1,0 +1,40 @@
+{% extends "admin.twig" %}
+
+{% block manage %}
+    <h2>Administrer les utilisateurs</h2>
+    {#    {{ isDeleteSuccess }} #}
+    {#    <table> #}
+    {#        <thead> #}
+    {#        <tr> #}
+    {#            <th>ID</th> #}
+    {#            <th>Titre</th> #}
+    {#            <th>Auteur</th> #}
+    {#            <th>Catégorie</th> #}
+    {#            <th>URL</th> #}
+    {#            <th>Créé le</th> #}
+    {#            <th>Modifié le</th> #}
+    {#            <th>Actions</th> #}
+    {#        </tr> #}
+    {#        </thead> #}
+    {#        <tbody> #}
+    {#        {% for post in posts %} #}
+    {#            <tr> #}
+    {#                <td>{{ post.id }}</td> #}
+    {#                <td>{{ post.title }}</td> #}
+    {#                <td>{{ post.author }}</td> #}
+    {#                <td> #}
+    {#                    <a href="/?cat_id={{ post.category_id }}">{{ post.category_name }}</a> #}
+    {#                </td> #}
+    {#                <td> #}
+    {#                    <a href="/?post_id={{ post.id }}">{{ hostUrl }}/?post_id={{ post.id }}</a> #}
+    {#                </td> #}
+    {#                <td>{{ post.created_at }}</td> #}
+    {#                <td>{{ post.modified_at }}</td> #}
+    {#                <td> #}
+    {#                    <a href="/?action=delete&post_id={{ post.id }}" class="btn btn-danger">Supprimer</a> #}
+    {#                </td> #}
+    {#            </tr> #}
+    {#        {% endfor %} #}
+    {#        </tbody> #}
+    {#    </table> #}
+{% endblock %}
